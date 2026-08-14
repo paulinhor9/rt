@@ -96,7 +96,7 @@ h1 span,h2 span{color:var(--green)}
 .partners-section h2{color:#07110b}
 .partners-section .section-heading p{color:#5d6a60}
 .partners-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
-.partners-grid div{height:150px;border-radius:20px;background:white;display:flex;align-items:center;justify-content:center;padding:20px;box-shadow:0 15px 45px rgba(0,0,0,.08)}
+.partners-grid div{height:150px;border-radius:20px;background:#000;display:flex;align-items:center;justify-content:center;padding:20px;box-shadow:0 15px 45px rgba(0,0,0,.08)}
 .partners-grid img{max-height:100%;object-fit:contain}
 .cta{position:relative;min-height:85vh;display:flex;align-items:center;overflow:hidden}
 .cta-content{position:relative;z-index:2;text-align:center}
