@@ -27,3 +27,11 @@ Substitua pelos dados oficiais do RT.
 - `app.js`: animações e contadores
 - `assets/`: fotos, escudo e patrocinadores
 - `vercel.json`: configuração de hospedagem
+
+
+## Atualização das cotas
+
+- Master: fechada
+- Mangas: 2 disponíveis
+- Costas: 2 de 4 fechadas; 2 disponíveis
+- Total: 3 de 7 cotas fechadas
