@@ -32,6 +32,6 @@ Substitua pelos dados oficiais do RT.
 ## Atualização das cotas
 
 - Master: fechada
-- Mangas: 2 disponíveis
-- Costas: 2 de 4 fechadas; 2 disponíveis
-- Total: 3 de 7 cotas fechadas
+- Ombros/mangas: 2 de 2 fechadas; esgotadas
+- Costas: 3 de 4 fechadas; 1 disponível
+- Total: 6 de 7 cotas fechadas
