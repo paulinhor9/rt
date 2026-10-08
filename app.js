@@ -1,33 +1,61 @@
-
+﻿const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const reveals = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: .12 });
-reveals.forEach(el => revealObserver.observe(el));
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+  document.documentElement.classList.add('js-motion');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: .08 });
+  reveals.forEach(el => observer.observe(el));
+}
 
 const counters = document.querySelectorAll('[data-counter]');
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting || entry.target.dataset.done) return;
-    const el = entry.target;
-    const target = Number(el.dataset.counter);
-    const suffix = el.dataset.suffix || '';
-    const duration = 1200;
-    const start = performance.now();
-    function tick(now){
-      const p = Math.min((now - start) / duration, 1);
-      el.textContent = Math.floor(target * (1 - Math.pow(1-p, 3))).toLocaleString('pt-BR') + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-      else el.dataset.done = '1';
-    }
-    requestAnimationFrame(tick);
-  });
-}, { threshold: .6 });
-counters.forEach(el => counterObserver.observe(el));
+const formatCounter = el => Number(el.dataset.counter).toLocaleString('pt-BR') + (el.dataset.suffix || '');
+counters.forEach(el => { el.textContent = formatCounter(el); });
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      const el = entry.target;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / 1000, 1);
+        el.textContent = Math.floor(Number(el.dataset.counter) * (1 - Math.pow(1 - progress, 3))).toLocaleString('pt-BR') + (el.dataset.suffix || '');
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: .5 });
+  counters.forEach(el => observer.observe(el));
+}
 
 const header = document.querySelector('.site-header');
-window.addEventListener('scroll', () => {
-  header.style.background = window.scrollY > 40 ? 'rgba(4,8,5,.92)' : 'rgba(4,8,5,.65)';
+const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+
+const menu = document.querySelector('.menu-toggle');
+const nav = document.querySelector('#site-nav');
+document.documentElement.classList.add('js-nav');
+menu.hidden = false;
+function closeMenu() {
+  menu.setAttribute('aria-expanded', 'false');
+  nav.classList.remove('is-open');
+}
+menu.addEventListener('click', () => {
+  const open = menu.getAttribute('aria-expanded') !== 'true';
+  menu.setAttribute('aria-expanded', String(open));
+  nav.classList.toggle('is-open', open);
 });
+nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
+    closeMenu();
+    menu.focus();
+  }
+});
+window.matchMedia('(min-width: 981px)').addEventListener('change', closeMenu);
