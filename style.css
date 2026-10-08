@@ -76,12 +76,12 @@ h1 span,h2 span{color:var(--green)}
 .phone-icons{font-size:1.4rem;margin-bottom:12px}
 .uniform-section{background:linear-gradient(135deg,#07110b,#020403)}
 .uniform-visual{display:flex;justify-content:center}
-.shirt{width:360px;height:420px;position:relative;background:linear-gradient(135deg,#101b13,#071009);clip-path:polygon(20% 0,36% 8%,64% 8%,80% 0,100% 18%,88% 36%,82% 28%,82% 100%,18% 100%,18% 28%,12% 36%,0 18%);border:1px solid rgba(53,241,118,.3);filter:drop-shadow(0 35px 50px rgba(0,0,0,.45))}
+.shirt{width:min(360px,100%);aspect-ratio:6/7;position:relative;background:linear-gradient(135deg,#101b13,#071009);clip-path:polygon(20% 0,36% 8%,64% 8%,80% 0,100% 18%,88% 36%,82% 28%,82% 100%,18% 100%,18% 28%,12% 36%,0 18%);border:1px solid rgba(53,241,118,.3);filter:drop-shadow(0 35px 50px rgba(0,0,0,.45))}
 .shirt:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,rgba(53,241,118,.08),transparent 65%)}
-.shirt img{position:absolute;top:70px;left:45px;width:55px}
-.shirt-master{position:absolute;top:150px;left:50%;transform:translateX(-50%);font-size:2rem;font-weight:950;color:var(--green)}
-.shirt-sleeve{position:absolute;top:105px;font-size:.7rem;color:var(--green);font-weight:900}
-.shirt-sleeve.left{left:28px}.shirt-sleeve.right{right:24px}
+.shirt img{position:absolute;top:17%;left:50%;transform:translateX(-50%);width:18%;height:18%;object-fit:contain;z-index:1}
+.shirt-master{position:absolute;top:40%;left:50%;transform:translateX(-50%);font-size:clamp(1.4rem,5vw,2rem);font-weight:950;color:var(--green)}
+.shirt-sleeve{position:absolute;top:21%;font-size:.7rem;color:var(--green);font-weight:900}
+.shirt-sleeve.left{left:8%}.shirt-sleeve.right{right:8%}
 .benefits{padding:0;list-style:none;display:grid;gap:12px}
 .benefits li{padding-left:30px;position:relative;color:#d7e4da}
 .benefits li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
